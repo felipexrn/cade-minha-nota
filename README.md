@@ -17,7 +17,7 @@ Este projeto tem como objetivo ~~tirar sarro do atraso no lançamento de notas f
    ```
    python run.py
    ```
-   Será aberta uma janela com a `foto` do professor de cada professor, `barra de progresso` de cada disciplina, `número de dias` de atraso por disciplina.
+   Será aberta uma janela com a `foto` do professor de cada disciplina, `barra de progresso` verde e cinza, `número de dias` de atraso por disciplina.
 
 4. **Encerrar o programa**: Basta fechar a janela que foi aberta. Ou digite `Ctrl + C` no terminal. 
 
