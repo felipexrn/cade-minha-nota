@@ -39,7 +39,6 @@ Este projeto tem como objetivo ~~tirar sarro com o atraso no lançamento de nota
 - **run.py**: Vai montar e abrir uma janela com as fotos dos professores e barra de progresso representando os dias de atraso para lançamento das notas de cada disciplina.
 - **config.ini**: Arquivo que contém as configurações do programa login.py.
 - **requirements.txt**: Arquivo que contém as bibliotecas necessárias para a execução dos programas login.py e run.py.
-- **.gitignore**: Arquivo que contém nomes dos diretórios e arquivos a serem ignorados pelo versionamento.
 
 ### Artefatos a serem gerados:
 - **disciplinas_sem_notas.json**: Arquivo que contém os dados das disciplinas com atraso de lançamento de notas finais.
