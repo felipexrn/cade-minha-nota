@@ -11,7 +11,7 @@ Este projeto tem como objetivo ~~tirar sarro com o atraso no lançamento de nota
 
 2. **Preencha o arquivo config.ini**: Coloque seus dados no arquivo de configuração como **matrícula** e **senha** do SUAP, **ano** e **período** letivos e **data inicial** de contagem do atraso do lançamento das notas. 
 
-   ***Atente para que seus dados permaneçam no seu ambiente local. Tome cuidado par que suas informações de login no SUAPnão se tornem públicas. Lembre de manter seus dados em sigilo.***
+   ***Atente para que seus dados permaneçam no seu ambiente local. Tome cuidado par que suas informações de login no SUAP não se tornem públicas. Lembre de manter seus dados em sigilo.***
 
 3. **Executar o programa**: Execute o comando no terminal.
    ```
