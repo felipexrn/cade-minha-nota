@@ -32,7 +32,7 @@ def criar_barras(atrasados):
 
         # Cria um canvas para colocar a barra de progresso
         canvas = tk.Canvas(frame, width=tamanho_barra, height=30)
-        canvas.pack(side=tk.LEFT, padx=10)
+        canvas.pack(side=tk.BOTTOM, padx=10)
 
         # Desenha a barra de progresso no canvas
         canvas.create_rectangle(0, 0, tamanho_barra, 30, outline="", fill="gray")
@@ -43,10 +43,10 @@ def criar_barras(atrasados):
         
         # Exibe o nome da disciplina
         label_disciplina = tk.Label(frame, text=f"{atrasados[atrasado]['disciplina']}".split(" - ")[1])
-        label_disciplina.pack(side=tk.LEFT, padx=10)
+        label_disciplina.pack(side=tk.TOP, padx=10)
 
         # Calcula a largura total
-        largura_total = max(largura_total, 10 + 30 + tamanho_barra + len(label_disciplina['text']) * 8)
+        largura_total = max(largura_total, 10 + 30 + tamanho_barra + 50)
 
 # Função para carregar o dicionário de atrasados do arquivo JSON
 def carregar_dados_json(nome_arquivo):
