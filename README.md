@@ -1,6 +1,6 @@
 # Fórmula cadê minha nota
 
-Este projeto tem como objetivo ~~tirar sarro com o atraso no lançamento de notas finais das disciplinas na plataforma SUAP.~~ estudar requisições http e manipulação de imagens com bibliotecas python.
+Este projeto tem como objetivo ~~tirar sarro do atraso no lançamento de notas finais das disciplinas na plataforma SUAP.~~ estudar requisições http e manipulação de imagens com bibliotecas python.
 
 ### Instruções:
 
