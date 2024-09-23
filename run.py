@@ -9,7 +9,7 @@ def criar_barras(atrasados):
     global largura_total  # Usa uma variável global para calcular a largura total
     
     # Define o tamanho da barra
-    tamanho_barra = 300      
+    tamanho_barra = 300
     max_dias = 0
     for atrasado in atrasados:
         max_dias = max(max_dias, atrasados[atrasado]['dias'])
@@ -28,18 +28,18 @@ def criar_barras(atrasados):
         # Exibe a imagem
         label_img = tk.Label(frame, image=foto)
         label_img.image = foto
-        label_img.pack(side=tk.LEFT, padx=10)
+        label_img.pack(side=tk.LEFT, padx=10, anchor='w')
 
         # Cria um canvas para colocar a barra de progresso
         canvas = tk.Canvas(frame, width=tamanho_barra, height=30)
-        canvas.pack(side=tk.BOTTOM, padx=10)
+        canvas.pack(side=tk.BOTTOM, padx=10, anchor='w')
 
         # Desenha a barra de progresso no canvas
         canvas.create_rectangle(0, 0, tamanho_barra, 30, outline="", fill="gray")
         canvas.create_rectangle(0, 0, int(tamanho_barra * (atrasados[atrasado]['dias'] / proporcao)), 30, outline="", fill="green")
 
         # Exibe o valor (dias) sobre a barra de progresso
-        canvas.create_text(tamanho_barra // 2, 15, text=f"{atrasados[atrasado]['dias']} dias", fill="white", font=("Arial", 12))
+        canvas.create_text(tamanho_barra // 2, 15, text=f"{atrasados[atrasado]['dias']} dias", fill="white", font=("Arial", 12, "bold"))
         
         # Exibe o nome da disciplina
         label_disciplina = tk.Label(frame, text=f"{atrasados[atrasado]['disciplina']}".split(" - ")[1])
