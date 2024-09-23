@@ -43,7 +43,7 @@ def criar_barras(atrasados):
         
         # Exibe o nome da disciplina
         label_disciplina = tk.Label(frame, text=f"{atrasados[atrasado]['disciplina']}".split(" - ")[1])
-        label_disciplina.pack(side=tk.TOP, padx=10)
+        label_disciplina.pack(side=tk.TOP, padx=10, anchor='w')
 
         # Calcula a largura total
         largura_total = max(largura_total, 10 + 30 + tamanho_barra + 50)
