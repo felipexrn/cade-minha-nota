@@ -19,9 +19,7 @@ Este projeto tem como objetivo ~~tirar sarro do atraso no lançamento de notas f
    ```
    Será aberta uma janela com a `foto` do professor de cada disciplina, `barra de progresso` verde e cinza, `número de dias` de atraso por disciplina.
 
-4. **Encerrar o programa**: Basta fechar a janela que foi aberta. Ou digite `Ctrl + C` no terminal. 
-
-5. **Resultados**: No terminal haverá a seguinte estrutura:
+4. **Resultados**: No terminal haverá a seguinte estrutura:
    ```
    Login bem sucedido.
    NOME_USUAL - CURSO
@@ -30,6 +28,7 @@ Este projeto tem como objetivo ~~tirar sarro do atraso no lançamento de notas f
    - Dias: Número de dias  de atraso - Nome do professor - Curso
    - Dias: Número de dias  de atraso - Nome do professor - Curso
    ```
+5. **Encerrar o programa**: Basta fechar a janela que foi aberta. Ou digite `Ctrl + C` no terminal. 
    
 6. **Coletando dados**: Execute o programa **diariamente** para que os dados sejam coletados e as barras de progresso aumentem. 
 
