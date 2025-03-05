@@ -56,6 +56,9 @@ Execute o seguinte comando no terminal.
 ### 6. Coletando dados
    Execute o programa **diariamente** para que os dados sejam coletados e as barras de progresso aumentem. 
 
+### 7. Problemas e melhorias
+   Este programa faz uso da api do SUAP https://suap.ifrn.edu.br/api/docs portanto qualquer alteração nas rotas da api pode comprometer o funcionamento desta aplicação. Caso tenha ideias ou sugestões de funcionalidades e melhorias fique à vontade para modificar este código. Fico no aguardo do pódium de vocês.
+
 ## Arquivos:
 
 - **login.py**: Responsável por acessar os dados da API do SUAP e armazená-los num arquivo json.
