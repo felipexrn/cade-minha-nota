@@ -16,7 +16,7 @@ Este projeto tem como objetivo ~~tirar sarro do atraso no lançamento de notas f
    Coloque seus dados no arquivo de configuração como **matrícula** e **senha** do SUAP, **ano** e **período** letivos e **data inicial** de contagem do atraso do lançamento das notas. Exemplo:
    ```
    [SUAP]
-   MATRICULA=20152010567
+   MATRICULA=0123456789
    SENHA=0123456789
    ANO=2024
    PERIODO=1
