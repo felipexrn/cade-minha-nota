@@ -2,6 +2,8 @@
 
 Este projeto tem como objetivo ~~tirar sarro do atraso no lançamento de notas finais das disciplinas na plataforma SUAP.~~ estudar requisições http e manipulação de imagens com bibliotecas python.
 
+*OBS.: Atualmente esta aplicação roda somente no windows. Portando ela não funciona no codespaces.*
+
 ## Instruções:
 
 ### 1. Instale as dependências do arquivo requirements.txt 
