@@ -7,7 +7,7 @@ Este projeto tem como objetivo ~~tirar sarro do atraso no lançamento de notas f
 ## Instruções:
 
 ### 1. Instale as dependências do arquivo requirements.txt 
-   Serão necessárias duas bibliotecas: Pillow Para manipulação de imagens. Requests para efetuar as requisições http para a API do SUAP. Para instalar execute no terminal:
+   Além do Python instalado serão necessárias duas bibliotecas: Pillow Para manipulação de imagens. Requests para efetuar as requisições http para a API do SUAP. Para instalar execute no terminal:
    ```
    pip install -r requirements.txt
    ```
