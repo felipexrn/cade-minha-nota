@@ -55,7 +55,7 @@ def carregar_dados_json(nome_arquivo):
 
 # Cria a janela principal
 root = tk.Tk()
-root.title("Fómula cadê minha nota")
+root.title("Fórmula cadê minha nota")
 
 # Inicializa dimensões gerais
 largura_total = 0 
