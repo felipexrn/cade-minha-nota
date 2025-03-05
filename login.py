@@ -10,6 +10,9 @@ def carregar_disciplinas(arquivo_json):
         with open(arquivo_json, 'r', encoding='utf-8') as arquivo:
             return json.load(arquivo)
     else:
+        # Se o arquivo não existir, cria um novo arquivo vazio
+        with open(arquivo_json, 'w', encoding='utf-8') as arquivo:
+            json.dump({}, arquivo, ensure_ascii=False, indent=4)
         return {}
 
 def salvar_disciplinas(arquivo_json, dados):
@@ -51,12 +54,12 @@ def pegar_atrasados():
     dias_sem_nota = (data_atual - data_inicial).days  # Calcular a diferença em dias  
 
     # URL de autenticação do SUAP
-    url = "https://suap.ifrn.edu.br/api/v2/autenticacao/token/"
+    url = "https://suap.ifrn.edu.br/api/token/pair"
     token_access = ""
     token_refresh = ""
 
     # Pede dados de login se não estiverem configurados
-    if (matricula == "" and senha ==""):
+    if (matricula == "" or senha == ""):
         matricula = input("digite sua matricula do SUAP\n")
         senha = getpass.getpass("Digite sua senha do SUAP\n")
 
@@ -71,7 +74,7 @@ def pegar_atrasados():
         data_ini = input("digite a data inicial de contagem de dias (dd/mm/aaaa)\n")
 
     # Fazendo o POST para obter o token
-    resposta_authenticacao = requests.post(url, data=dados_login)
+    resposta_authenticacao = requests.post(url, json=dados_login)
 
     if resposta_authenticacao.status_code == 200:
         # Pegando o token
@@ -85,9 +88,8 @@ def pegar_atrasados():
             'Authorization': f'Bearer {token_access}',  # Corrigido para 'Bearer'
             'accept': 'application/json'  # Aceitar resposta em JSON
         }
-        
         # Requisição dos meus dados 
-        url_dados = "https://suap.ifrn.edu.br/api/v2/minhas-informacoes/meus-dados/"
+        url_dados = "https://suap.ifrn.edu.br/api/rh/meus-dados/"
         responsta_meus_dados = requests.get(url_dados, headers=cabecalho)
         
         # respostas da requisição 
@@ -100,11 +102,10 @@ def pegar_atrasados():
         if ano_letivo == "" and periodo_letivo == "":
             # Pede o ano letivo e periodo letivo ao usuário se não tiver configurado
             ano_periodo_letivo = input("Digite o ano e periodo letivo para ver o boletim (formato: 2023.2)\n")    
-            ano_periodo_letivo = '2024.1'
             ano_letivo, periodo_letivo = map(int, ano_periodo_letivo.split("."))
 
         # URL do boletim com o ano e periodo letivo
-        url_boletim = f"https://suap.ifrn.edu.br/api/v2/minhas-informacoes/boletim/{ano_letivo}/{periodo_letivo}"
+        url_boletim = f"https://suap.ifrn.edu.br/api/edu/meu-boletim/{ano_letivo}/{periodo_letivo}"
 
         # Requisição GET para buscar o boletim
         responsta_boletim = requests.get(url_boletim, headers=cabecalho)
@@ -118,7 +119,7 @@ def pegar_atrasados():
                     nome_disciplina = disciplina['disciplina']                                                                         
                     
                     # URL da turma vitual com id    
-                    url_turma_vitual = f"https://suap.ifrn.edu.br/api/v2/minhas-informacoes/turma-virtual/{disciplina['codigo_diario']}/"
+                    url_turma_vitual = f"https://suap.ifrn.edu.br/api/edu/minha-turma-virtual/{disciplina['codigo_diario']}/"
                         
                     # Requisição GET para buscar turma vitual
                     resposta_turma_virtual = requests.get(url_turma_vitual, headers=cabecalho)
