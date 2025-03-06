@@ -53,6 +53,16 @@ def carregar_dados_json(nome_arquivo):
     with open(nome_arquivo, 'r', encoding='utf-8') as arquivo:
         return json.load(arquivo)
 
+# Conecta ao SUAP e recupera os dados
+login.pegar_atrasados()
+
+# tenta criar janela de teste
+try:
+    janela = tk.Tk()
+    janela.destroy()
+except:
+    exit("Não foi possível criar uma janela. Este sistema operacional não possui interface gráfica.")
+
 # Cria a janela principal
 root = tk.Tk()
 root.title("Fórmula cadê minha nota")
@@ -61,9 +71,6 @@ root.title("Fórmula cadê minha nota")
 largura_total = 0 
 altura_total = 400 
 altura_frame = 50
-
-# Conecta ao SUAP e recupera os dados
-login.pegar_atrasados()
 
 # Nome do arquivo JSON com os dados dos professores
 arquivo_json = 'disciplinas_sem_nota.json'
