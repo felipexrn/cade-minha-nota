@@ -5,6 +5,7 @@ from datetime import datetime
 import json
 import os
 
+# carrega ou cria o arquivo das disciplinas sem notas postadas
 def carregar_disciplinas(arquivo_json):
     if os.path.exists(arquivo_json):
         with open(arquivo_json, 'r', encoding='utf-8') as arquivo:
@@ -15,6 +16,7 @@ def carregar_disciplinas(arquivo_json):
             json.dump({}, arquivo, ensure_ascii=False, indent=4)
         return {}
 
+# salva o arquivo das disciplinas sem notas postadas
 def salvar_disciplinas(arquivo_json, dados):
     with open(arquivo_json, 'w', encoding='utf-8') as arquivo:
         json.dump(dados, arquivo, ensure_ascii=False, indent=4)
@@ -29,6 +31,34 @@ def baixar_foto_professor(url_foto, nome_professor):
     else:
         print(f"Erro ao baixar a foto de {nome_professor}. Status: {resposta_foto.status_code}")
 
+# cria ou salva arquivo de configuração    
+def atualizar_config(nome_arquivo, matricula ="", senha="", ano="", periodo="", data_ini=""):
+    # Carrega o arquivo de configuração
+    config = configparser.ConfigParser()
+    
+    if not os.path.exists(nome_arquivo):
+        config['SUAP'] = {
+            'matricula': str(matricula),
+            'senha': str(senha),
+            'ano': str(ano),
+            'periodo': str(periodo),
+            'dataini': str(data_ini)
+        }
+    else:
+        # Atualiza as configurações
+        config.read(nome_arquivo)
+    
+        config['SUAP']['matricula'] = str(matricula) if str(matricula) != "" else config['SUAP']['matricula']
+        config['SUAP']['senha']     = str(senha)     if str(senha)     != "" else config['SUAP']['senha'] 
+        config['SUAP']['ano']       = str(ano)       if str(ano)       != "" else config['SUAP']['ano'] 
+        config['SUAP']['periodo']   = str(periodo)   if str(periodo)   != "" else config['SUAP']['periodo']
+        config['SUAP']['dataini']   = str(data_ini)  if str(data_ini)  != "" else config['SUAP']['dataini']
+
+    # Salva as alterações de volta no arquivo
+    with open(nome_arquivo, 'w', encoding='utf-8') as configfile:
+        config.write(configfile, space_around_delimiters=False)
+
+# Acessa API do SUAP com os dados da configuração e salva e exibe os dados das disciplinas
 def pegar_atrasados():
 
     # Carregar disciplinas do arquivo JSON, se existir
@@ -37,21 +67,21 @@ def pegar_atrasados():
 
     # Cria um objeto ConfigParser
     config = configparser.ConfigParser()
+    
+    # Verifica se o arquivo de configuração existe, se não, cria um com valores vazios
+    nome_arquivo = 'config.ini'
+    #if not os.path.exists(nome_arquivo):
+    atualizar_config(nome_arquivo)
 
     # Carrega o arquivo config.ini
-    config.read('config.ini')
+    config.read(nome_arquivo)
 
     # Obtem os dados do arquivo de configuração
-    matricula = config['SUAP']['MATRICULA']
-    senha = config['SUAP']['SENHA']
-    ano_letivo = config['SUAP']['ANO']
-    periodo_letivo = config['SUAP']['PERIODO']
-    data_ini = config['SUAP']['DATAINI']
-
-    # Calcula o número de dias desde a data inicial até a data atual
-    data_inicial = datetime.strptime(data_ini, '%d/%m/%Y')  # Converter a string da data inicial
-    data_atual = datetime.now()  # Obter a data atual
-    dias_sem_nota = (data_atual - data_inicial).days  # Calcular a diferença em dias  
+    matricula = config['SUAP']['matricula']
+    senha = config['SUAP']['senha']
+    ano_letivo = config['SUAP']['ano']
+    periodo_letivo = config['SUAP']['periodo']
+    data_ini = config['SUAP']['dataini']
 
     # URL de autenticação do SUAP
     url = "https://suap.ifrn.edu.br/api/token/pair"
@@ -68,10 +98,6 @@ def pegar_atrasados():
         "username": f"{matricula}",
         "password": f"{senha}"
     }
-
-    # Pede data inicial se não estiver configurada
-    if (data_ini == ""):
-        data_ini = input("digite a data inicial de contagem de dias (dd/mm/aaaa)\n")
 
     # Fazendo o POST para obter o token
     resposta_authenticacao = requests.post(url, json=dados_login)
@@ -112,6 +138,18 @@ def pegar_atrasados():
 
         if responsta_boletim.status_code == 200:
             boletim = responsta_boletim.json()
+            
+            # Pede data inicial se não estiver configurada
+            while True:
+                try:
+                    datetime.strptime(data_ini, '%d/%m/%Y')
+                    break
+                except:            
+                    data_ini = input("digite a data inicial de contagem de dias (dd/mm/aaaa)\n")
+
+            data_inicial = datetime.strptime(data_ini, '%d/%m/%Y')  # Converter a string da data inicial
+            data_atual = datetime.now()  # Obter a data atual
+            dias_sem_nota = (data_atual - data_inicial).days  # Calcular a diferença em dias  
 
             for disciplina in boletim:
                     
@@ -155,9 +193,12 @@ def pegar_atrasados():
             # Lista disciplinas sem notas do ano e período consultados
             print(f"Disciplinas que ainda não receberam notas em {ano_letivo}.{periodo_letivo}:")        
             for nome_disciplina, dados_disciplina in disciplinas_sem_nota.items():
-                if ((dados_disciplina['ano'] == ano_letivo) and (dados_disciplina['periodo'] == periodo_letivo)):
+                if ((dados_disciplina['ano'] == str(ano_letivo)) and (dados_disciplina['periodo'] == str(periodo_letivo))):
                     print(f"- dias: {dados_disciplina['dias']} - {dados_disciplina['professor']} - {nome_disciplina}") 
-                    
+           
+            # salva as informações no config.ini  
+            atualizar_config(nome_arquivo, matricula,senha,ano_letivo,periodo_letivo,data_ini)
+
         else:
             print(f"Falha ao obter o boletim. Status: {responsta_boletim.status_code}")            
             
