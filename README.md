@@ -67,5 +67,6 @@ Execute o seguinte comando no terminal.
 ## Artefatos a serem gerados:
 - **disciplinas_sem_notas.json**: Arquivo que contém os dados das disciplinas com atraso de lançamento de notas finais.
 - **Nome_Sobrenome.jpg**: Imagens das fotos dos professores das disciplinas com atraso no lançamento das notas.
+- **relatorio_atrasos_{ANO_LETIVO}.{PERIODO_LETIVO}.png**: Imagem com a relação das disciplinas com atraso na postagem das notas no período consultado.
 
 
