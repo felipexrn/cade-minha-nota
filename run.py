@@ -10,11 +10,12 @@ def criar_imagem(atrasados, nome_arquivo_imagem):
     espacamento = 10  # Espaçamento entre as barras
     margem_superior = 10
     margem_inferior = 10
-    tamanho_fonte_titulo = 12
+    tamanho_fonte_titulo = 13
+    padding_titulo = 30
     tamanho_fonte = 12
     
     # Define o tamanho da imagem (inicialmente)
-    tamanho_barra = 300
+    tamanho_barra = 400
     max_dias = 0
     for atrasado in atrasados:
         max_dias = max(max_dias, atrasados[atrasado]['dias'])
@@ -22,10 +23,10 @@ def criar_imagem(atrasados, nome_arquivo_imagem):
     
     # Calcular a largura total e altura total da imagem
     for atrasado in atrasados:
-        largura_total = max(largura_total, 10 + 30 + tamanho_barra + 50)
+        largura_total = max(largura_total, 10 + 30 + tamanho_barra + 25)
         altura_total += (altura_frame + espacamento)
     
-    altura_total += margem_inferior + tamanho_fonte_titulo
+    altura_total += margem_superior + tamanho_fonte_titulo + margem_inferior
     
     # Cria uma nova imagem em branco (fundo branco)
     imagem = Image.new('RGB', (largura_total, altura_total), (255, 255, 255))
@@ -44,7 +45,7 @@ def criar_imagem(atrasados, nome_arquivo_imagem):
     # Desenha o título na imagem
     titulo = "Dias de atraso para postagem da média final do periodo " + login.pegar_ano_periodo()
     draw.text(((largura_total-(len(titulo)*tamanho_fonte_titulo/2))//2, y_offset), titulo, font=fonte_titulo, fill=(0, 0, 0))
-    y_offset += 20  # Ajusta a posição para o próximo elemento
+    y_offset += padding_titulo  # Ajusta a posição para o próximo elemento
 
     for atrasado in atrasados:
         # Calcula a posição de cada elemento
