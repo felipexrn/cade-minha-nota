@@ -30,7 +30,7 @@ Execute o seguinte comando no terminal.
    ```
 
 ### 4. Resultados
-   Será aberta uma janela com a `foto` do professor de cada disciplina, `barra de progresso` verde e cinza, `número de dias` de atraso por disciplina e nome da disciplina. Já no terminal haverá a seguinte estrutura:
+   Será criada uma imagem com a `foto` do professor de cada disciplina, `barra de progresso` verde e cinza, `número de dias` de atraso e nome da disciplina por disciplina do boletim do ano e período configurados. Já no terminal haverá a seguinte estrutura:
    ```
    Login bem sucedido.
    NOME_USUAL - CURSO
