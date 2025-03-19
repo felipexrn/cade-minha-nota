@@ -192,21 +192,16 @@ def pegar_atrasados():
                 if resposta_turma_virtual.status_code == 200:
                     turma_virtual = resposta_turma_virtual.json()
                     nome_professor = turma_virtual["professores"][0]["nome"]    
-                    url_foto_professor = turma_virtual["professores"][0]["foto"]                
-                    
-                    # Atualiza ou adiciona a disciplina no dicionário
-                    if not disciplina['media_final_disciplina']:
-                        # Atualiza apenas o campo de dias se já existir
-                        disciplinas_sem_nota[nome_disciplina]["dias"] = dias_sem_nota
-                    else:
-                        # Adiciona nova disciplina
-                        disciplinas_sem_nota[nome_disciplina] = {
-                            "dias": 0,
-                            "professor": nome_professor,
-                            "disciplina": nome_disciplina,
-                            "ano": ano_letivo,
-                            "periodo" : periodo_letivo
-                        }                                   
+                    url_foto_professor = turma_virtual["professores"][0]["foto"]   
+
+                    # Adiciona e atualiza a disciplina no dicionário
+                    disciplinas_sem_nota[nome_disciplina] = {
+                        "dias": dias_sem_nota if not disciplina['media_final_disciplina'] else 0,
+                        "professor": nome_professor,
+                        "disciplina": nome_disciplina,
+                        "ano": ano_letivo,
+                        "periodo" : periodo_letivo
+                    }                                                           
                         
                     # Baixar e salvar a foto do professor
                     if not os.path.exists(f"{nome_professor.replace(' ', '_')}.jpg"):
